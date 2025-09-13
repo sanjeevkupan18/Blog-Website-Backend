@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include("./partials/head") %>
+    <title>Add Blog</title>
+    <style>
+    body {
+      background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+      font-family: "Poppins", sans-serif;
+    }
+    .add-blog-card {
+      max-width: 700px;
+      margin: 60px auto;
+      background-color: #fff;
+      border-radius: 16px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+      padding: 40px;
+    }
+    .add-blog-card h1 {
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 10px;
+    }
+    .add-blog-card p {
+      color: #666;
+      margin-bottom: 30px;
+    }
+    .form-control {
+      border-radius: 10px;
+      padding: 12px;
+    }
+    textarea.form-control {
+      min-height: 250px;
+      resize: vertical;
+    }
+    .btn-submit {
+      background-color: #6c63ff;
+      border: none;
+      border-radius: 10px;
+      padding: 12px 20px;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+    .btn-submit:hover {
+      background-color: #5548e2;
+    }
+  </style>
+</head>
+<body>
+    <%- include("./partials/nav") %>
+
+    <div class="add-blog-card">
+    <h1 class="text-center">Create a New Blog Post 📝</h1>
+    <p class="text-center">Share your ideas with the Blogify community</p>
+
+    <form action="/blog" method="post" enctype="multipart/form-data">
+      <div class="mb-3">
+        <label for="coverImage" class="form-label">Cover Image</label>
+        <input
+          type="file"
+          class="form-control"
+          id="coverImage"
+          name="coverImage"
+          aria-describedby="coverImageHelp"
+        />
+        <div id="coverImageHelp" class="form-text">
+          Upload a featured image to represent your blog post.
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input
+          type="text"
+          class="form-control"
+          id="title"
+          name="title"
+          placeholder="Enter a catchy title"
+          required
+        />
+      </div>
+
+      <div class="mb-3">
+        <label for="body" class="form-label">Body</label>
+        <textarea
+          name="body"
+          class="form-control"
+          id="body"
+          placeholder="Write your blog content here..."
+          required
+        ></textarea>
+      </div>
+
+      <div class="mb-3 text-center">
+        <button class="btn btn-submit w-100">Publish Blog</button>
+      </div>
+    </form>
+  </div>
+    
+    <%- include("./partials/script") %>
+</body>
+</html>

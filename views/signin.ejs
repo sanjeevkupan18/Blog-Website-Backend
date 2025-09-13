@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include("./partials/head") %>
+    <title>Sign in</title>
+    <style>
+    body {
+      background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+      font-family: "Poppins", sans-serif;
+    }
+    .signin-card {
+      max-width: 450px;
+      margin: 60px auto;
+      background-color: #fff;
+      border-radius: 16px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+      padding: 40px;
+    }
+    .signin-card h1 {
+      font-weight: 700;
+      color: #333;
+    }
+    .signin-card p {
+      color: #666;
+      margin-bottom: 30px;
+    }
+    .form-control {
+      border-radius: 10px;
+      padding: 12px;
+    }
+    .btn-primary {
+      background-color: #6c63ff;
+      border: none;
+      border-radius: 10px;
+      padding: 12px 20px;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+    .btn-primary:hover {
+      background-color: #5548e2;
+    }
+  </style>
+  </head>
+  <body>
+    <%- include("./partials/nav") %>
+
+    <div class="signin-card text-center">
+    <h1>Welcome back to Blogify 👋</h1>
+    <p>Sign in to continue sharing and exploring stories</p>
+    <form action="/user/signin" method="post" class="text-start">
+      <div class="mb-3">
+        <label for="email" class="form-label">Email address</label>
+        <input
+          type="email"
+          name="email"
+          class="form-control"
+          id="email"
+          placeholder="name@example.com"
+          required
+        />
+        <div class="form-text">
+          We'll never share your email with anyone else.
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input
+          type="password"
+          name="password"
+          class="form-control"
+          id="password"
+          placeholder="Enter your password"
+          required
+        />
+      </div>
+      <button type="submit" class="btn btn-primary w-100">Sign In</button>
+      <div class="mt-3 text-center">
+        <small>Don’t have an account? <a href="/user/signup">Create one</a></small>
+      </div>
+    </form>
+  </div>
+    <%- include("./partials/script") %>
+  </body>
+</html>

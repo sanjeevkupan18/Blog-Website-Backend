@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include("./partials/head") %>
+    <title>Homepage</title>
+    <style>
+    body {
+      background-color: #f8f9fa;
+      font-family: "Poppins", sans-serif;
+    }
+    .blog-header {
+      text-align: center;
+      padding: 40px 0;
+    }
+    .blog-header h1 {
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+    .blog-cover {
+      width: 100%;
+      max-width: 500px;
+      border-radius: 12px;
+      object-fit: cover;
+      margin: 0 auto 30px;
+      display: block;
+    }
+    .blog-content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 15px 40px;
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: #333;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+      padding: 30px;
+    }
+    .author-info {
+      max-width: 800px;
+      margin: 20px auto;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding: 15px;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+    .author-info img {
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+    }
+    .comment-section {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 30px;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.05);
+    }
+    .comment-section h2 {
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+    .comment-form input {
+      border-radius: 10px;
+      padding: 12px;
+    }
+    .comment-form .btn {
+      margin-top: 10px;
+      border-radius: 10px;
+      background-color: #6c63ff;
+      border: none;
+      font-weight: 500;
+      padding: 10px 20px;
+    }
+    .comment-form .btn:hover {
+      background-color: #5548e2;
+    }
+    .single-comment {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #eaeaea;
+    }
+    .single-comment img {
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      object-fit: cover;
+    }
+    .comment-content {
+      flex: 1;
+    }
+    .comment-author {
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+    .comment-text {
+      white-space: pre-wrap;
+      font-size: 0.95rem;
+      color: #444;
+    }
+  </style>
+  </head>
+  <body>
+    <%- include("./partials/nav") %>
+    
+    <div class="blog-header">
+    <h1><%= blog.title %></h1>
+    <img src="<%= blog.coverImageURL %>" alt="<%= blog.title %>" class="blog-cover">
+  </div>
+
+  <div class="blog-content">
+    <p><%= blog.body %></p>
+  </div>
+
+  <div class="author-info">
+    <img src="<%= blog.createdBy.profileImageURL %>" alt="<%= blog.createdBy.fullname %>">
+    <div>
+      <div class="fw-bold"><%= blog.createdBy.fullname %></div>
+      <small class="text-muted">Author</small>
+    </div>
+  </div>
+
+  <div class="comment-section">
+    <h2>Comments (<%= comments.length %>)</h2>
+
+    <% if (locals.user) { %>
+      <form action="/blog/comment/<%= blog._id %>" method="post" class="comment-form mb-4">
+        <input
+          type="text"
+          class="form-control"
+          name="content"
+          placeholder="Enter your comment"
+          required
+        />
+        <button type="submit" class="btn btn-primary">Add Comment</button>
+      </form>
+    <% } else { %>
+      <p class="text-muted">You must be logged in to post a comment.</p>
+    <% } %>
+
+    <% comments.forEach(comment => { %>
+      <div class="single-comment">
+        <img src="<%= comment.createdBy.profileImageURL %>" alt="<%= comment.createdBy.fullname %>">
+        <div class="comment-content">
+          <div class="comment-author"><%= comment.createdBy.fullname %></div>
+          <div class="comment-text"><%= comment.content %></div>
+        </div>
+      </div>
+    <% }) %>
+  </div>
+
+    <%- include("./partials/script") %>
+  </body>
+</html>
